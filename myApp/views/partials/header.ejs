@@ -1,0 +1,21 @@
+<header>
+    <div class="flexbox-header">
+        <div class="container">
+            <a href="/"><img class="logo" src="/images/Logo.png" alt="logo"></a>
+        </div>
+        <nav class="main-nav">
+            <ul class="flexbox-ul">
+                <% if(locals.isLogged) { %>
+                <li><a href="/users/profile">Profile</a></li>
+                <li><a href="/transactions">Transactions</a></li>
+                <li><a href="/transactions/type/expenses">Expenses</a></li>
+                <li><a href="/transactions/type/incomes">Incomes</a></li>
+                <li><a href="/users/logout">Sign out</a></li>
+                <% } else {%> 
+                <li><a href="/users/login">Sign in</a></li>
+                <li><a href="/users/register">Register</a></li>
+                <% } %> 
+            </ul>
+        </nav>
+    </div>
+</header>

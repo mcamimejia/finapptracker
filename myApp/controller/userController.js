@@ -15,5 +15,9 @@ const userController = {
         res.render("user/editForm");
     },
 
+    logout: (req,res) => {
+        
+    }
+
 }
 module.exports = userController;
