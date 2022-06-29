@@ -13,8 +13,9 @@ const transaction = require('./api/routes/transactionRoutes');
 const category = require('./api/routes/categoryRoutes');
 
 //view routes
-const indexRouter = require('./routes/index');
+const mainRouter = require('./routes/main');
 const usersRouter = require('./routes/users');
+const transactionsRouter = require('./routes/transactions');
 
 const app = express();
 
@@ -34,8 +35,9 @@ app.use('/api/transactions', transaction);
 app.use('/api/categories', category);
 
 //view routes
-app.use('/', indexRouter);
+app.use('/', mainRouter);
 app.use('/users', usersRouter);
+app.use('/transactions', transactionsRouter);
 
 
 // catch 404 and forward to error handler
