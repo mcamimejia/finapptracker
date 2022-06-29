@@ -9,7 +9,34 @@
   <%- include('../partials/header') %>
 
   <main>
-    
+    <div class="form-container">
+        <form class="forms" action="/users/login" method="POST">
+            <h2>Sign in</h2>
+            <div>
+                <input class="form-input" type="email" name="email" placeholder="Email">
+                <% if(locals.errors && errors.email){ %>
+                    <div class="text-danger">
+                        <%= errors.email.msg %>
+                    </div>
+                <% } %>
+            </div>
+            <div>
+                <input class="form-input" type="password" name="password" placeholder="Password">
+                <% if(locals.errors && errors.password){ %>
+                    <div class="text-danger">
+                        <%= errors.password.msg %>
+                    </div>
+                <% } %>
+            </div>
+
+            <div class="terms">
+                <input class="checkbox" type="checkbox" name="remember">
+                <p>Remember me</a></p>
+            </div>
+            <button type="reset">Reset</button>
+            <button type="submit">Sign in</button>
+        </form>
+    </div>
   </main>
 
   <%- include('../partials/footer') %>
