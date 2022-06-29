@@ -1,2 +1,2 @@
 # finapptracker
-Alkemy full stack chanllenge
+Alkemy full stack challenge
