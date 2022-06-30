@@ -9,7 +9,7 @@ const controller = {
                 color: req.body.color
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/categories'}, data: response})
+                return res.json(response);
             })
             
 	},
@@ -18,7 +18,7 @@ const controller = {
 		db.Category
             .findAll()
             .then(categories => {
-                return res.status(200).json({meta: {status: 200, url: 'api/categories'}, data: categories})
+                return res.json(categories);
             })
 	},
 
@@ -26,7 +26,7 @@ const controller = {
 		db.Category
             .findByPk(req.params.id)
             .then(category => {
-                return res.status(200).json({meta: {status: 200, url: 'api/categories/' + req.params.id}, data: category})
+                return res.json(category);
             })
 	},
 
@@ -40,7 +40,7 @@ const controller = {
                 { where: {category_id: req.params.id}}
             )
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/categories/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	},
 
@@ -52,7 +52,7 @@ const controller = {
                 }
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/categories/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	}
 }

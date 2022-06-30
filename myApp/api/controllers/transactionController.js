@@ -13,7 +13,7 @@ const controller = {
                 user_id: req.body.user_id
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions'}, data: response})
+                return res.json(response);
             })
             
 	},
@@ -22,35 +22,17 @@ const controller = {
 		db.Transaction
             .findAll()
             .then(transactions => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions'}, data: transactions})
-            })
-	},
-
-    byUser: (req, res) => {
-		db.Transaction
-            .findAll({
-                where: {user_id : req.params.id}
-            })
-            .then(transactionsByUser => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions/user/'+ req.params.id}, data: transactionsByUser})
-            })
-	},
-
-    byCategory: (req, res) => {
-		db.Transaction
-            .findAll({
-                where: {category_id : req.params.id}
-            })
-            .then(transactionsByCategory => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions/category/'+ req.params.id}, data: transactionsByCategory})
+                return res.json(transactions);
             })
 	},
 
 	detail: (req, res) => {
 		db.Transaction
-            .findByPk(req.params.id)
+            .findByPk(req.params.id, {
+                include: ['category']
+            })
             .then(transaction => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions/' + req.params.id}, data: transaction})
+                return res.json(transaction);
             })
 	},
 
@@ -68,7 +50,7 @@ const controller = {
                 { where: {transaction_id: req.params.id}}
             )
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	},
 
@@ -80,7 +62,7 @@ const controller = {
                 }
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/transactions/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	}
 }

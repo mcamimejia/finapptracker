@@ -56,6 +56,10 @@ li {
   margin: 1rem;
 }
 
+.expense {
+  color: red;
+}
+
 .flexbox-footer {
   align-items: center;
   display: flex;
@@ -161,11 +165,26 @@ li {
   height: 18rem;
 }
 
+.income {
+  color: green;
+}
+
 .info {
   align-items: center;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+}
+
+.info a {
+  border-radius: 5px;
+  padding: 1rem;
+  transition: all 500ms;
+}
+
+.info a:hover {
+  background-color: var(--second);
+  color: white;
 }
 
 .info div, .info a{
@@ -218,11 +237,17 @@ li {
   background-color: var(--second); 
 }
 
-.social i{
-  cursor: pointer;
-  margin: 1rem;
-  font-size: 1.5rem;
-  transition: all 500ms;
+.more {
+  color: var(--second);
+  font-size: 1.2rem;
+}
+
+.negative {
+  color: var(--invalid);
+}
+
+.positive {
+  color: var(--second);
 }
 
 .profile-main {
@@ -231,6 +256,13 @@ li {
 
 .profile-main h2 {
   color: var(--second);
+}
+
+.social i{
+  cursor: pointer;
+  margin: 1rem;
+  font-size: 1.5rem;
+  transition: all 500ms;
 }
 
 .social i:hover{
@@ -248,10 +280,14 @@ li {
   justify-content: space-between;
 }
 
+.transactions i {
+  font-size: 1.2rem;
+}
+
 .transactions-container {
   border: solid 3px var(--fourth);
   border-radius: 10px;
-  width: 70%;
+  width: 60%;
 }
 
 .transactions-container h3 {

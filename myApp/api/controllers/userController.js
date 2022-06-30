@@ -27,7 +27,10 @@ const controller = {
 
 	detail: (req, res) => {
 		db.User
-            .findByPk(req.params.id)
+            .findByPk(req.params.id, {
+                include: ['transactions'], 
+                order: [[{ associaton: 'transactions' }, 'date', 'DESC']]
+            })
             .then(user => {
                 return res.json(user);
             })

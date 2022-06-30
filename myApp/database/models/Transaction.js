@@ -44,7 +44,7 @@ module.exports = (sequelize, dataTypes) => {
         });
 
         Transaction.belongsTo(models.Category, {
-            as: 'categories',
+            as: 'category',
             foreignKey: 'category_id'
         })
     }
