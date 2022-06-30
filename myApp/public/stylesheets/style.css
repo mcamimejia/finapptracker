@@ -33,6 +33,20 @@ li {
   list-style-type: none;
 }
 
+.balance {
+  text-align: center;
+  width: 30%;
+}
+
+.balance div {
+  font-size: 2rem;
+}
+
+.balance h3 {
+  color: var(--second);
+  margin: 1rem;
+}
+
 .container {
   margin: 0;
   padding: 0;
@@ -49,6 +63,12 @@ li {
   justify-content: space-around;
 }
 
+.flexbox-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .flexbox-main {
   align-items: center;
   display: flex;
@@ -56,10 +76,11 @@ li {
   margin-top: 2rem;
 }
 
-.flexbox-header {
+.flexbox-profile {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 1rem;
 }
 
 .flexbox-ul {
@@ -89,6 +110,16 @@ li {
   background-color: rgba(90,199,166,0.2);
   border-radius: 15px;
   padding: 1rem;
+}
+
+.forms a {
+  color: var(--second);
+  display: block;
+  transition: all 200ms;
+}
+
+.forms a:hover {
+  font-weight: bold;
 }
 
 .forms button {
@@ -128,6 +159,18 @@ li {
 
 .home-main {
   height: 18rem;
+}
+
+.info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.info div, .info a{
+  color: var(--second);
+  font-weight: bold;
 }
 
 .logo {
@@ -182,26 +225,42 @@ li {
   transition: all 500ms;
 }
 
+.profile-main {
+  margin-bottom: 5rem;
+}
+
+.profile-main h2 {
+  color: var(--second);
+}
+
 .social i:hover{
   color: var(--second);
-}
-
-.terms {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.terms a {
-  color: var(--second);
-  transition: all 500ms;
-}
-
-.terms a:hover {
-  font-weight: bold;
 }
 
 .text-danger{
   color: var(--invalid);
   font-weight: bold;
+}
+
+.transactions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.transactions-container {
+  border: solid 3px var(--fourth);
+  border-radius: 10px;
+  width: 70%;
+}
+
+.transactions-container h3 {
+  margin: 1rem;
+}
+
+.transactions-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1rem;
 }

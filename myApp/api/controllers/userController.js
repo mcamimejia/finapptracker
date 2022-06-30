@@ -12,7 +12,7 @@ const controller = {
                 currency: req.body.currency
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/users'}, data: response})
+                return res.json(response);
             })
             
 	},
@@ -21,7 +21,7 @@ const controller = {
 		db.User
             .findAll()
             .then(users => {
-                return res.status(200).json({meta: {status: 200, url: 'api/users'}, data: users})
+                return res.json(users);
             })
 	},
 
@@ -29,7 +29,7 @@ const controller = {
 		db.User
             .findByPk(req.params.id)
             .then(user => {
-                return res.status(200).json({meta: {status: 200, url: 'api/users/' + req.params.id}, data: user})
+                return res.json(user);
             })
 	},
 
@@ -45,7 +45,7 @@ const controller = {
                 { where: {user_id: req.params.id}}
             )
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/users/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	},
 
@@ -57,7 +57,7 @@ const controller = {
                 }
             })
             .then(response => {
-                return res.status(200).json({meta: {status: 200, url: 'api/users/' + req.params.id}, data: response})
+                return res.json(response);
             })
 	}
 }

@@ -1,3 +1,6 @@
+const axios = require('axios').default;
+const resource = 'http://localhost:3000/api/users';
+
 const userController = {
     registerForm: (req,res) => {
         res.render("user/registerForm");
@@ -8,11 +11,27 @@ const userController = {
     },
 
     profile: (req,res) => {
-        res.render("user/profile");
+        axios
+            .get(resource + "/" + req.params.id)
+            .then(response => {
+                console.log(response.data);
+                res.render('user/profile', {user: response.data})
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
     
     editForm: (req,res) => {
-        res.render("user/editForm");
+        axios
+            .get(resource + "/" + req.params.id)
+            .then(response => {
+                console.log(response.data);
+                res.render('user/editForm', {user: response.data})
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     logout: (req,res) => {
