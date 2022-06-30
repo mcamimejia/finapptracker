@@ -1,12 +1,14 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const path = require('path');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // middlewares
 const error404 = require('./middlewares/error404');
 const errorHandler = require('./middlewares/errorHandler');
+const userLoginMiddleware = require('./middlewares/userLoginMiddleware');
 
 //api routes
 const user = require('./api/routes/userRoutes');
@@ -28,8 +30,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret:'valor',
+    resave: false,
+    saveUninitialized : false
+}));
+
+app.use(cookieParser());
+
+app.use(userLoginMiddleware);
 
 //api endpoints
 app.use('/api/users', user);

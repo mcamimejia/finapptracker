@@ -13,7 +13,7 @@
         <form class="forms" action="/users/edit/1?_method=PUT" method="POST">
             <h2>Edit your profile</h2>
             <div>
-                <input class="form-input" type="text" name="name" placeholder="Name">
+                <input class="form-input" type="text" name="name" placeholder="Name" value="<%= user.name%>">
                 <% if(locals.errors && errors.name){ %>
                     <div class="text-danger">
                         <%= errors.name.msg %>
@@ -21,7 +21,7 @@
                 <% } %>
             </div>
             <div>
-                <input class="form-input" type="email" name="email" placeholder="Email">
+                <input class="form-input" type="email" name="email" placeholder="Email" value="<%= user.email%>">
                 <% if(locals.errors && errors.email){ %>
                     <div class="text-danger">
                         <%= errors.email.msg %>
@@ -29,7 +29,7 @@
                 <% } %>
             </div>
             <div>
-                <input class="form-input" type="password" name="password" placeholder="Password">
+                <input class="form-input" type="password" name="password" placeholder="New Password">
                 <% if(locals.errors && errors.password){ %>
                     <div class="text-danger">
                         <%= errors.password.msg %>
@@ -47,9 +47,11 @@
             <div>
               <label>Select your currency</label>
               <select class="form-input" name="currency">
-                <option value="COP">Colombian peso (COP)</option>
-                <option value="USD">American dolar (USD)</option>
-                <option value="MXN">Mexican peso (MXN)</option>
+                <% for (let currency in currencies) { %> 
+                    <option value="<%=currency%>" <%= currency == user.currency ? "selected" : "" %> >
+                        <%= currency%> - <%= currencies[currency]%>
+                    </option>
+                <%}%>
               </select>
               <% if(locals.errors && errors.currency){ %>
                   <div class="text-danger">

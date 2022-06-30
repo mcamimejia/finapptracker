@@ -1,9 +1,16 @@
 const axios = require('axios').default;
+const bcryptjs = require('bcryptjs');
+const {validationResult} = require('express-validator');
 const userResource = 'http://localhost:3000/api/users';
+const currenciesResource = 'https://openexchangerates.org/api/currencies.json';
 
 const userController = {
     registerForm: (req,res) => {
-        res.render("user/registerForm");
+        axios
+            .get(currenciesResource)
+            .then(response => {
+                res.render("user/registerForm", {currencies : response.data});
+            })
     },
 
     create: (req,res) => {
@@ -15,7 +22,39 @@ const userController = {
     },
 
     login: (req,res) => {
-        
+        axios.get(userResource).then(result => {
+            let userToLogin = result.data.find(user => user.email == req.body.email);
+            console.log(userToLogin)
+            if(userToLogin){
+                let verifyPassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
+                console.log(verifyPassword)
+                if(verifyPassword){
+                    delete userToLogin.password;
+
+                    req.session.userLogged = userToLogin;
+
+                    if(req.body.remember){
+                        res.cookie('emailLogged', req.body.email, {maxAge: (1000 * 60) * 60})
+                    }
+                    return res.redirect("profile/" + req.session.userLogged.user_id);
+                }
+                return res.render("user/loginForm", {
+                    errors: {
+                        email: {
+                            msg: "Invalid credentials"
+                        }
+                    }
+                });
+            }
+            return res.render("user/loginForm", {
+                errors: {
+                    email: {
+                        msg: "User not registered"
+                    }
+                }
+            });
+        });
+            
     },
 
     profile: (req,res) => {
@@ -31,8 +70,6 @@ const userController = {
                         balance = balance - Number(transaction.amount);
                     }
                 });
-                console.log(balance);
-                console.log(user);
                 res.render('user/profile', {user: user, balance: balance})
             })
             .catch(err => {
@@ -41,11 +78,11 @@ const userController = {
     },
     
     editForm: (req,res) => {
-        axios
-            .get(userResource + "/" + req.params.id)
-            .then(response => {
-                console.log(response.data);
-                res.render('user/editForm', {user: response.data})
+        let currencyPromise = axios.get(currenciesResource);
+        let userPromise = axios.get(userResource + "/" + req.params.id);
+        Promise.all([currencyPromise, userPromise])
+            .then(([currencyResult, userResult]) => {
+                res.render('user/editForm', {user: userResult.data, currencies: currencyResult.data})
             })
             .catch(err => {
                 console.log(err)

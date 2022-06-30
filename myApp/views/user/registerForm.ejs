@@ -47,9 +47,9 @@
             <div>
               <label>Select your currency</label>
               <select class="form-input" name="currency">
-                <option value="COP">Colombian peso (COP)</option>
-                <option value="USD">American dolar (USD)</option>
-                <option value="MXN">Mexican peso (MXN)</option>
+                <% for (let currency in currencies) { %> 
+                    <option value="<%=currency%>"><%= currency%> - <%= currencies[currency]%></option>
+                <%}%>
               </select>
               <% if(locals.errors && errors.currency){ %>
                   <div class="text-danger">
