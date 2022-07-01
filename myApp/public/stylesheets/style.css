@@ -23,6 +23,7 @@ button {
 
 footer {
   background-color: var(--fourth);
+  margin-top: 5rem;
 }
 
 header {

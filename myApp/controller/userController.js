@@ -11,19 +11,46 @@ const userController = {
             .then(response => {
                 res.render("user/registerForm", {currencies : response.data});
             })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     create: (req,res) => {
-        axios
-            .post(userResource, {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                currency: req.body.currency
-            })
-            .then(result => {
-                res.redirect("../users/login");
-            })        
+        let validResult = validationResult(req);
+        if(!validResult.isEmpty()){
+            axios
+                .get(currenciesResource)
+                .then(response => {
+                    return res.render("user/registerForm", {currencies : response.data, errors: validResult.mapped()});
+                });
+        }else{
+            axios.get(userResource).then(result => {
+                let emailExist = result.data.find(user => user.email == req.body.email);
+                if(emailExist){
+                    axios
+                        .get(currenciesResource)
+                        .then(response => {
+                            return res.render("user/registerForm", {currencies : response.data, errors: {
+                                email: {
+                                    msg: 'User already register'
+                                }
+                            }});
+                        });
+                }else {
+                    axios
+                        .post(userResource, {
+                            name: req.body.name,
+                            email: req.body.email,
+                            password: req.body.password,
+                            currency: req.body.currency
+                        })
+                        .then(result => {
+                            res.redirect("../users/login");
+                        });
+                }
+            });
+        }        
     },
     
     loginForm: (req,res) => {
@@ -59,6 +86,9 @@ const userController = {
                     }
                 }
             });
+        })
+        .catch(err => {
+            console.log(err)
         });
             
     },
@@ -105,7 +135,10 @@ const userController = {
             })
             .then(result => {
                 res.redirect("../profile/" + req.params.id);
-            }) 
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     delete: (req,res) => {
@@ -114,7 +147,10 @@ const userController = {
             .then(result => {
                 req.session.destroy();
                 res.redirect("/");
-            })        
+            })
+            .catch(err => {
+                console.log(err)
+            });        
     },
 
     logout: (req,res) => {
