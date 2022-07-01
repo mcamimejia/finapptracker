@@ -11,19 +11,19 @@ Clone repository or Download zip
 git clone https://github.com/mcamimejia/finapptracker.git
 ```
 
-move to the folder
+Move to the folder
 
 ```sh
 cd myApp
 ```
 
-install dependencies:
+Install dependencies
 
 ```sh
 npm install
 ```
 
-execute the project
+Execute the project
 
 ```sh
 nodemon bin/www
