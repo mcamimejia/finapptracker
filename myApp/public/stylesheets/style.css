@@ -172,6 +172,11 @@ li {
   margin: 0.5rem;
 }
 
+.green {
+  color: green;
+  font-weight: bold;
+}
+
 .h1-home {
   color: var(--second);
   margin-top: 4rem;
@@ -275,6 +280,11 @@ li {
   color: var(--second);
 }
 
+.red {
+  color: red;
+  font-weight: bold;
+}
+
 .social i{
   cursor: pointer;
   margin: 1rem;
@@ -315,5 +325,9 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: 1rem;
+}
+
+.transactions-more div{
   margin: 1rem;
 }

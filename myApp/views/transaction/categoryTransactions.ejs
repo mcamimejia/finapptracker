@@ -9,7 +9,29 @@
   <%- include('../partials/header') %>
 
   <main>
-    
+    <div class="info">
+      <div> <a href="/transactions/add">Add transaction</a></div>
+    </div>
+    <div class="flexbox-profile">
+      <article class="transactions-container">
+        <h3>Category: <%= categorySelected.name%></h3>
+        <div class="transactions-details">
+          <% transactions.forEach(transaction => { 
+            if(transaction.user_id == locals.userLogged.user_id) {%>
+            <div class="transactions">
+              <% if(transaction.type == 'Income') { %>
+              <a href="/transactions/type/incomes"><i class="fa-solid fa-square-plus positive"></i></a>
+              <% } else {%>
+              <a href="/transactions/type/expenses"><i class="fa-solid fa-square-minus negative"></i></a>
+              <% }%>
+              <div><%= transaction.date%></div>
+              <div><%= transaction.amount%></div>
+              <a href="/transactions/detail/<%= transaction.transaction_id%>"><i class="fa-solid fa-angles-right more"></i></a>
+            </div> 
+          <% }}) %>
+        </div>
+      </article>
+    </div>   
   </main>
 
   <%- include('../partials/footer') %>

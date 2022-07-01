@@ -4,11 +4,14 @@ const transactionController = require('../controller/transactionController');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/', authMiddleware, transactionController.getAll);
-router.get('/category/:id', authMiddleware, transactionController.byCategory);
-router.get('/type/:type', authMiddleware, transactionController.byType);
-router.get('/add', authMiddleware, transactionController.creationForm);
-router.get('/detail/:id', authMiddleware, transactionController.detail);
-router.get('/edit/:id', authMiddleware, transactionController.editForm);
+router.get('/', authMiddleware, transactionController.getAll); //All transactions 
+router.get('/category/:id', authMiddleware, transactionController.byCategory); // Transactions by category
+router.get('/type/:id', authMiddleware, transactionController.byType); // Transactions by type
+router.get('/add', authMiddleware, transactionController.creationForm); // Add transaction form
+router.post('/add', authMiddleware, transactionController.create); // Add transaction process
+router.get('/detail/:id', authMiddleware, transactionController.detail); // Transaction detail
+router.get('/edit/:id', authMiddleware, transactionController.editForm); // Edit transaction form
+router.put('/edit/:id', authMiddleware, transactionController.update); // Edit transaction process
+router.get('/delete/:id', authMiddleware, transactionController.delete); // Delete transaction process
 
 module.exports = router;

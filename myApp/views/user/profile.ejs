@@ -23,13 +23,13 @@
           <% user.transactions.forEach(transaction => { %>
           <div class="transactions">
             <% if(transaction.type == 'Income') { %>
-            <a href="/transactions/type/incomes"><i class="fa-solid fa-square-plus positive"></i></a>
+            <a href="/transactions/type/1"><i class="fa-solid fa-square-plus positive"></i></a>
             <% } else {%>
-            <a href="/transactions/type/expenses"><i class="fa-solid fa-square-minus negative"></i></a>
+            <a href="/transactions/type/2"><i class="fa-solid fa-square-minus negative"></i></a>
             <% }%>
             <div><%= transaction.date%></div>
             <div><%= transaction.amount%></div>
-            <a href="/transactions/<%= transaction.transaction_id%>"><i class="fa-solid fa-angles-right more"></i></a>
+            <a href="/transactions/detail/<%= transaction.transaction_id%>"><i class="fa-solid fa-angles-right more"></i></a>
           </div> 
           <% }) %>
         </div>

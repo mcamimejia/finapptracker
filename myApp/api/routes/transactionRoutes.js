@@ -3,20 +3,11 @@ const transactionController = require('../controllers/transactionController');
 
 const router = express.Router();
 
-// Create transaction
-router.post('/', transactionController.create);
-
-// Get transactions
-router.get('/', transactionController.list);
-
-// transaction detail
-router.get('/:id', transactionController.detail);
-
-// Update transaction
-router.put('/:id', transactionController.update);
-
-// Delete transaction
-router.delete('/:id', transactionController.delete);
+router.post('/', transactionController.create); // Create transaction
+router.get('/', transactionController.list); // Get transactions
+router.get('/:id', transactionController.detail); // transaction detail
+router.put('/:id', transactionController.update); // Update transaction
+router.delete('/:id', transactionController.delete); // Delete transaction
 
 
 module.exports = router;

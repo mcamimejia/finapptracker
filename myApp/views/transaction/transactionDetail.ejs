@@ -9,7 +9,23 @@
   <%- include('../partials/header') %>
 
   <main>
-    
+    <div class="info">
+      <div> <a href="/transactions/edit/<%= transaction.transaction_id%>">Edit transaction</a></div>
+      <div> <a href="/transactions/delete/<%= transaction.transaction_id%>">Delete transaction</a></div>
+    </div>
+    <div class="flexbox-profile">
+      <article class="transactions-container">
+        <h3 class="<%=transaction.category.color%>"><%= transaction.type %></h3>
+        <div class="transactions-details">
+          <div class="transactions-more">
+            <div>Date: <%= transaction.date%></div>
+            <div>Amount: $ <%= transaction.amount%></div>
+            <div>Description: <%= transaction.description%></div>
+            <div>Category: <a href="/transactions/category/<%= transaction.category.category_id%>"><%= transaction.category.name %></a></div>
+          </div>
+        </div>
+      </article>
+    </div>
   </main>
 
   <%- include('../partials/footer') %>
