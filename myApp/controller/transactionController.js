@@ -49,11 +49,29 @@ const transactionController = {
     },
     
     creationForm: (req,res) => {
-        res.render("transaction/creationForm");
+        axios
+            .get(categoryResource)
+            .then(response => {
+                res.render("transaction/creationForm", {categories : response.data});
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     create: (req,res) => {
-        
+        axios
+            .post(transactionResource, {
+                type: req.body.type,
+                amount: req.body.amount,
+                date: req.body.date,
+                description: req.body.description,
+                category_id: req.body.category_id,
+                user_id: req.session.userLogged.user_id
+            })
+            .then(result => {
+                res.redirect("/");
+            });
     },
 
     detail: (req,res) => {
@@ -68,15 +86,44 @@ const transactionController = {
     },
 
     editForm: (req,res) => {
-        res.render("transaction/editForm");
+        let categoryPromise = axios.get(categoryResource);
+        let transactionPromise = axios.get(transactionResource + "/" + req.params.id);
+        Promise.all([categoryPromise, transactionPromise])
+            .then(([categoryResult, transactionResult]) => {
+                res.render('transaction/editForm', {categories: categoryResult.data, transaction: transactionResult.data})
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     update: (req,res) => {
-        
+        axios
+            .put(transactionResource + '/' + req.params.id, {
+                type: req.body.type,
+                amount: req.body.amount,
+                date: req.body.date,
+                description: req.body.description,
+                category_id: req.body.category_id,
+                user_id: req.session.userLogged.user_id
+            })
+            .then(result => {
+                res.redirect("/");
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
     delete: (req,res) => {
-        
+        axios
+            .delete(transactionResource + '/' + req.params.id)
+            .then(result => {
+                res.redirect("/");
+            })
+            .catch(err => {
+                console.log(err)
+            });
     },
 
 }

@@ -9,7 +9,62 @@
   <%- include('../partials/header') %>
 
   <main>
-    
+    <div class="form-container">
+      <form class="forms" action="/transactions/edit/<%=transaction.transaction_id%>?_method=PUT" method="POST">
+          <h2>Edit transaction</h2>
+          <div>
+            <label>Select type</label>
+            <select class="form-input" name="type">
+              <option value="Income" <%= 'Income' == transaction.type ? "selected" : "" %>>Income</option>
+              <option value="Expense" <%= 'Expense' == transaction.type ? "selected" : "" %>>Expense</option>
+            </select>
+            <% if(locals.errors && errors.type){ %>
+                <div class="text-danger">
+                    <%= errors.type.msg %>
+                </div>
+            <% } %>
+          </div>
+          <div>
+              <input class="form-input" type="number" name="amount" placeholder="Amount" value="<%= transaction.amount%>">
+              <% if(locals.errors && errors.amount){ %>
+                  <div class="text-danger">
+                      <%= errors.amount.msg %>
+                  </div>
+              <% } %>
+          </div>
+          <div>
+              <input class="form-input" type="date" name="date" placeholder="Date" value="<%= transaction.date%>">
+              <% if(locals.errors && errors.date){ %>
+                  <div class="text-danger">
+                      <%= errors.date.msg %>
+                  </div>
+              <% } %>
+          </div>
+          <div>
+              <input class="form-input" type="text" name="description" placeholder="Description" value="<%= transaction.description%>">
+              <% if(locals.errors && errors.description){ %>
+                  <div class="text-danger">
+                      <%= errors.description.msg %>
+                  </div>
+              <% } %>
+          </div>
+          <div>
+            <label>Select Category</label>
+            <select class="form-input" name="category_id">
+              <% categories.forEach(category => { %>
+                  <option value="<%=category.category_id%>" <%= category.category_id == transaction.category.category_id ? "selected" : "" %>><%= category.name%></option>
+              <%})%>
+            </select>
+            <% if(locals.errors && errors.category_id){ %>
+                <div class="text-danger">
+                    <%= errors.category_id.msg %>
+                </div>
+            <% } %>
+          </div>
+          <button type="reset">Reset</button>
+          <button type="submit">Edit</button>
+      </form>
+    </div>
   </main>
 
   <%- include('../partials/footer') %>
