@@ -10,7 +10,7 @@
 
   <main>
     <div class="form-container">
-        <form class="forms" action="/users/edit/1?_method=PUT" method="POST">
+        <form class="forms" action="/users/edit/<%=user.user_id%>?_method=PUT" method="POST">
             <h2>Edit your profile</h2>
             <div>
                 <input class="form-input" type="text" name="name" placeholder="Name" value="<%= user.name%>">

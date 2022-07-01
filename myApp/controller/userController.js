@@ -14,7 +14,16 @@ const userController = {
     },
 
     create: (req,res) => {
-        
+        axios
+            .post(userResource, {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                currency: req.body.currency
+            })
+            .then(result => {
+                res.redirect("../users/login");
+            })        
     },
     
     loginForm: (req,res) => {
@@ -87,11 +96,25 @@ const userController = {
     },
 
     update: (req,res) => {
-        
+        axios
+            .put(userResource + '/' + req.params.id, {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                currency: req.body.currency
+            })
+            .then(result => {
+                res.redirect("../profile/" + req.params.id);
+            }) 
     },
 
     delete: (req,res) => {
-        
+        axios
+            .delete(userResource + '/' + req.params.id)
+            .then(result => {
+                req.session.destroy();
+                res.redirect("/");
+            })        
     },
 
     logout: (req,res) => {
