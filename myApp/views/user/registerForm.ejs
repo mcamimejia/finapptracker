@@ -63,6 +63,11 @@
                     <input class="checkbox" type="checkbox" name="terms">
                     Accept <a href="#">Terms and Conditions
                 </label>
+                <% if(locals.errors && errors.terms){ %>
+                    <div class="text-danger">
+                        <%= errors.terms.msg %>
+                    </div>
+                <% } %>
             </div>
             <button type="reset">Reset</button>
             <button type="submit">Register</button>

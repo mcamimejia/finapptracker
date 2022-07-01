@@ -61,6 +61,9 @@
             </div>
             <button type="submit">Edit</button>
         </form>
+        <form action="/users/<%=user.user_id%>?_method=delete" method="POST">
+            <button class="delete-account" type="submit">Delete account</button>
+        </form>
     </div>
   </main>
 

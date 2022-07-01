@@ -12,5 +12,7 @@ module.exports = [
             throw new Error("Password doesn't match");
         }
         return true;
-    })
+    }),
+    body('terms')
+        .notEmpty().withMessage("Required")
 ]

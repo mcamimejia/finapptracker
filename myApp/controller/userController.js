@@ -33,9 +33,6 @@ const userController = {
 
                     req.session.userLogged = userToLogin;
 
-                    if(req.body.remember){
-                        res.cookie('emailLogged', req.body.email, {maxAge: (1000 * 60) * 60})
-                    }
                     return res.redirect("profile/" + req.session.userLogged.user_id);
                 }
                 return res.render("user/loginForm", {
@@ -98,7 +95,8 @@ const userController = {
     },
 
     logout: (req,res) => {
-        
+        req.session.destroy();
+        return res.redirect("/");
     }
 
 }

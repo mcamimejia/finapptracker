@@ -56,6 +56,22 @@ li {
   margin: 1rem;
 }
 
+.delete-account {
+  background-color: var(--second);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  margin: 1rem;
+  padding: 1rem;
+  transition: all 500ms;
+  width: 40%;
+}
+
+.delete-account:hover {
+  opacity: 0.5;
+}
+
 .expense {
   color: red;
 }

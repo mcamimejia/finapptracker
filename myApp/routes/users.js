@@ -15,6 +15,6 @@ router.get('/profile/:id', authMiddleware, userController.profile); // Profile
 router.get('/edit/:id', authMiddleware, userController.editForm); // Edition Form
 router.put('/edit/:id', validationsMiddleware, userController.update); // Edit user
 router.delete('/:id', userController.delete); // Delete user
-router.post('/logout', userController.logout); // Logout process
+router.get('/logout', userController.logout); // Logout process
 
 module.exports = router;
